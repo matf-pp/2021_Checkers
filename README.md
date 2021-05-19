@@ -17,7 +17,11 @@ We used Scala programming language and Intellij IDEA environment to create our p
 
 ## 📎 Download and run the app
 ___
-An executable version of the program can be found in the releases section. It is necessary to download the .jar file. 
+An executable version of the program can be found in the releases section. 
+It is necessary to download the Checkers.jar file. Depending on the system, the program can be run as follows:
+- Linux: through the terminal, you position yourself in the directory where the Checkers.jas file is saved and with the command 'java -jar Checkers.jar' we start the program.
+- Windows: position yourself in the directory where the Checkers.jar file is saved and double-click on the file to start the program.
+
 To run the program, you need to have [Java](https://www.java.com/en/download/) installed on your computer.
 
 ## 🎓Authors
