@@ -17,7 +17,7 @@ We used Scala programming language and Intellij IDEA environment to create our p
 
 ## 📎 Download and run the app
 ___
-An executable version of the program can be found in the releases section. It is necessary to download the .zip file. 
+An executable version of the program can be found in the releases section. It is necessary to download the .jar file. 
 To run the program, you need to have [Java](https://www.java.com/en/download/) installed on your computer.
 
 ## 🎓Authors
