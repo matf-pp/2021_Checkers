@@ -1,6 +1,5 @@
 import java.lang.Math.round
-
-import Checkers.{COLS, IMG, IMG2, PIECE_COL1, PIECE_COL2, ROWS, SQR_COL1, SQR_COL2, SQUARE_SIZE, stage}
+//import Checkers.{COLS, IMG, IMG2, PIECE_COL1, PIECE_COL2, ROWS, SQR_COL1, SQR_COL2, SQUARE_SIZE, stage}
 import scalafx.Includes._
 import scalafx.application
 import scalafx.application.JFXApp
@@ -17,6 +16,7 @@ import scalafx.scene.shape.{Circle, Ellipse, Rectangle}
 import scalafx.scene.text.Text
 import scalafx.scene.{Node, Scene}
 
+import java.awt.{Dimension, Toolkit}
 import scala.collection._
 import scala.util.Random
 import scala.util.control.Breaks.{break, breakable}
@@ -25,19 +25,20 @@ object GUI extends JFXApp {
   val ROWS = 8
   val COLS = 8
   val SQUARE_SIZE = 100
-  val SQR_COL1 = Color.rgb(0, 0, 0)
-  val SQR_COL2 = Color.rgb(0, 255, 0)
-  val PIECE_COL1 = Color.White // + smer
-  val PIECE_COL2 = Color.rgb(180, 42, 43) // - smer
-  val WHITE_MAN = 1
-  val BLACK_MAN = -1
-  val WHITE_KING = 2
-  val BLACK_KING = -2
+  val SQR_COL1: Color = Color.rgb(0, 0, 0)
+  val SQR_COL2: Color = Color.rgb(0, 255, 0)
+  val PIECE_COL1: Color = Color.White // + smer
+  val PIECE_COL2: Color = Color.rgb(180, 42, 43) // - smer
+  val WHITE_MAN: Int = 1
+  val BLACK_MAN: Int = -1
+  val WHITE_KING: Int = 2
+  val BLACK_KING: Int = -2
   val IMG = new Image("orao.jpg", (SQUARE_SIZE / 75.0) * 33, (SQUARE_SIZE / 75.0) * 33, true, false)
   val IMG2 = new Image("beli_orao.png", (SQUARE_SIZE / 75.0) * 37, (SQUARE_SIZE / 75.0) * 37, true, false)
 
   stage = new JFXApp.PrimaryStage {
     title.value = "Checkers"
+    var screenSize : Dimension = Toolkit.getDefaultToolkit.getScreenSize
     width = 918
     height = 845
     scene = new Scene {
@@ -45,19 +46,19 @@ object GUI extends JFXApp {
         endX = 0,
         stops = Stops(Black, DarkGrey))
 
-      val fig1 = Circle(120, 240, 50, PIECE_COL1)
+      val fig1: Circle = Circle(120, 240, 50, PIECE_COL1)
       val view = new ImageView(IMG)
       view.x = 120 - IMG.width.value / 2.0
       view.y = 240 - IMG.height.value / 2.0
 
-      val fig2 = Circle(220, 390, 50, PIECE_COL2)
+      val fig2: Circle = Circle(220, 390, 50, PIECE_COL2)
       val view2 = new ImageView(IMG2)
       view2.x = 220 - IMG2.width.value / 2.0
       view2.y = 390 - IMG2.height.value / 2.0
 
-      val fig3 = Circle(120, 540, 50, PIECE_COL1)
+      val fig3: Circle = Circle(120, 540, 50, PIECE_COL1)
 
-      val fig4 = Circle(220, 690, 50, PIECE_COL2)
+      val fig4: Circle = Circle(220, 690, 50, PIECE_COL2)
 
       val startp: Button = new Button {
         text = "player VS player"
@@ -66,7 +67,7 @@ object GUI extends JFXApp {
         layoutY = 200
       }
       startp.textFill = Color.DarkRed
-      val shape = Circle(100.0)
+      val shape: Circle = Circle(100.0)
       startp.setShape(shape)
       startp.onAction = (e: ActionEvent) => {
         stage = new application.JFXApp.PrimaryStage {
@@ -77,7 +78,7 @@ object GUI extends JFXApp {
         }
       }
 
-      val nohint = new RadioButton {
+      val nohint: RadioButton = new RadioButton {
         text = "hint off"
         style = "-fx-font: normal bold 15pt sans-serif"
         layoutX = 350
@@ -86,7 +87,7 @@ object GUI extends JFXApp {
       nohint.textFill = Color.White
       nohint.setSelected(true)
 
-      val hint = new RadioButton {
+      val hint: RadioButton = new RadioButton {
         text = "hint on"
         style = "-fx-font: normal bold 15pt sans-serif"
         layoutX = 350
@@ -97,7 +98,7 @@ object GUI extends JFXApp {
       val toggle = new ToggleGroup
       toggle.toggles = List(nohint, hint)
 
-      val startc = new Button {
+      val startc: Button = new Button {
         text = "player VS computer"
         style = "-fx-font: normal bold 15pt sans-serif"
         layoutX = 350
@@ -111,7 +112,7 @@ object GUI extends JFXApp {
         }
       }
 
-      val exit = new Button {
+      val exit: Button = new Button {
         text = "EXIT"
         style = "-fx-font: normal bold 15pt sans-serif"
         layoutX = 700
@@ -123,7 +124,7 @@ object GUI extends JFXApp {
         sys.exit(0)
       }
 
-      val label = new Label {
+      val label: Label = new Label {
         text = "In our game modification you can choose between\n regular game " +
           "or game with additonal hint:\n you can put temporary figure anywhere for a move!"
         style = "-fx-font: normal bold 15pt sans-serif"
@@ -148,10 +149,10 @@ object GUI extends JFXApp {
           })
       }, startp, nohint, hint, startc, exit, fig1, fig2, view, view2, fig3, fig4, label)
 
-      var hintScene = new Scene(COLS * SQUARE_SIZE + 100, ROWS * SQUARE_SIZE) {
-        var hintGame = new HintGame(3)
-        val shape = Circle(100.0)
-        val hintbt = new Button {
+      val hintScene: Scene = new Scene(COLS * SQUARE_SIZE + 100, ROWS * SQUARE_SIZE) {
+        val hintGame = new HintGame(3)
+        val shape: Circle = Circle(100.0)
+        val hintbt: Button = new Button {
           text = "HINT"
           style = "-fx-font: normal bold 15pt sans-serif"
 
@@ -229,8 +230,15 @@ object GUI extends JFXApp {
           if (hintGame.selected != null) {
             draw_valid_moves()
           }
-          if (hintGame.winner() != null) {
-            stage.close()
+          if (hintGame.winner() == PIECE_COL1) {
+            content = new Label {
+              text = "Player 1 won! :D"
+            }
+          }
+          if (hintGame.winner() == PIECE_COL2) {
+            content = new Label {
+              text = "Player 2 won! :D"
+            }
           }
         }
 
@@ -244,8 +252,8 @@ object GUI extends JFXApp {
         }
 
       } // END OF SCENE
-      var classicScene = new Scene(COLS * SQUARE_SIZE, ROWS * SQUARE_SIZE) {
-        var game = new Game()
+      val classicScene: Scene = new Scene(COLS * SQUARE_SIZE, ROWS * SQUARE_SIZE) {
+        val game = new Game()
 
         def draw_board(): Unit = {
           for (i <- Range(0, ROWS))
@@ -290,8 +298,15 @@ object GUI extends JFXApp {
           draw_board()
           draw(game.board)
           draw_valid_moves()
-          if (game.winner() != null) {
-            stage.close()
+          if (game.winner() == PIECE_COL1) {
+            content = new Label {
+              text = "Player 1 won! :D"
+            }
+          }
+          if (game.winner() == PIECE_COL2) {
+            content = new Label {
+              text = "Player 2 won! :D"
+            }
           }
         } //END OF GUPDATER
 
@@ -305,9 +320,9 @@ object GUI extends JFXApp {
         }
 
       } // END OF SCENE
-      var computerScene = new Scene(COLS * SQUARE_SIZE + 100, ROWS * SQUARE_SIZE) {
-        var computerGame = new ComputerGame(PIECE_COL1)
-        val btn = new Button {
+      val computerScene: Scene = new Scene(COLS * SQUARE_SIZE + 100, ROWS * SQUARE_SIZE) {
+        val computerGame = new ComputerGame(PIECE_COL1)
+        val btn: Button = new Button {
           text = "Get Next Move"
           style = "-fx-font: normal bold 7pt sans-serif"
           layoutX = COLS * SQUARE_SIZE + 10
@@ -388,6 +403,7 @@ object GUI extends JFXApp {
         play_computer_game()
       } // END OF SCENE
       scene = classicScene
+
     } //END OF PRIMARY STAGE
 
 
@@ -514,9 +530,9 @@ object GUI extends JFXApp {
                 break
               }
               if (tmp.color == color) {
-                var map = this.get_valid_moves(tmp)
-                for (k <- Range(0, map.length)) {
-                  if (map(k)._1 && !map(k)._2.isEmpty)
+                val map = this.get_valid_moves(tmp)
+                for (k <- map.indices) {    //k <- Range(0, map.length)
+                  if (map(k)._1 && map(k)._2.nonEmpty)   //map(k)._1 && !map(k)._2.isEmpty
                     ind = true
                   if (map(k)._1)
                     ender = false
@@ -542,19 +558,19 @@ object GUI extends JFXApp {
           step = -1
         traverse_left(piece, List(), step)
         traverse_right(piece, List(), step)
-        if (piece.king == true) {
+        if (piece.king) {
           traverse_left(piece, List(), -step)
           traverse_right(piece, List(), -step)
         }
         //Ukoliko zelite da iskljucite obavezno preskakanje, izbrisite sledece grananje
-        if (captures == true) {
-          for (i <- Range(0, moves.length)) {
+        if (captures) {
+          for (i <- moves.indices) {   //i <- Range(0, moves.length)
             if (moves(i)._1 && moves(i)._2.isEmpty)
               moves(i) = (false, List())
           }
         }
         moves(piece.row * ROWS + piece.col) = (false, List())
-        return moves
+        moves    //return moves
       }
 
       def traverse_left(piece: Piece, skipped: List[Piece], step: Int): Unit = {
@@ -572,14 +588,14 @@ object GUI extends JFXApp {
               break
             val current = this.get_piece(r, left)
             if (current == null) {
-              if (!skipped.isEmpty && last.isEmpty) {
+              if (skipped.nonEmpty && last.isEmpty) {
                 break
               }
-              else if (!skipped.isEmpty) {
+              else if (skipped.nonEmpty) {
                 moves(r * ROWS + left) = (true, skipped ++ last)
               } else
                 moves(r * ROWS + left) = (true, last)
-              if (!last.isEmpty) {
+              if (last.nonEmpty) {
                 //ukoliko zelite da omogucite zaustavljanje izmedju skokova, izbrisite red ispod
                 moves(piece.row * ROWS + piece.col) = (false, List())
                 traverse_left(new Piece(r, left, piece.color, piece.king), skipped ++ last, step)
@@ -615,14 +631,14 @@ object GUI extends JFXApp {
               break
             val current = this.get_piece(r, right)
             if (current == null) {
-              if (!skipped.isEmpty && last.isEmpty) {
+              if (skipped.nonEmpty && last.isEmpty) {
                 break
               }
-              else if (!skipped.isEmpty) {
+              else if (skipped.nonEmpty) {
                 moves(r * ROWS + right) = (true, skipped ++ last)
               } else
                 moves(r * ROWS + right) = (true, last)
-              if (!last.isEmpty) {
+              if (last.nonEmpty) {
                 //ukoliko zelite da omogucite zaustavljanje izmedju skokova, izbrisite red ispod
                 moves(piece.row * ROWS + piece.col) = (false, List())
                 traverse_left(new Piece(r, right, piece.color, piece.king), skipped ++ last, step)
@@ -728,16 +744,16 @@ object GUI extends JFXApp {
 
       def move(row: Int, col: Int): Boolean = {
         val tmp = this.board.get_piece(row, col)
-        if (tmp == null && this.selected.color == this.turn && valid_moves(row * ROWS + col)._1 == true) {
+        if (tmp == null && this.selected.color == this.turn && valid_moves(row * ROWS + col)._1) {    //tmp == null && this.selected.color == this.turn && valid_moves(row * ROWS + col)._1 == true
           this.board.move(this.selected, row, col)
           //treba ukloniti figurice koje su eventualno pojedene
-          if (valid_moves(row * ROWS + col)._2.isEmpty == false) {
+          if (valid_moves(row * ROWS + col)._2.nonEmpty) {    //valid_moves(row * ROWS + col)._2.isEmpty == false
             this.board.remove(valid_moves(row * ROWS + col)._2)
           }
           this.change_turn()
           return true
         }
-        return false
+        false
       }
 
       def select(row: Int, col: Int): Unit = {
@@ -799,24 +815,24 @@ object GUI extends JFXApp {
 
       def move(row: Int, col: Int): Boolean = {
         val tmp = this.board.get_piece(row, col)
-        if (tmp == null && this.selected.color == turn && valid_moves(row * ROWS + col)._1 == true) {
+        if (tmp == null && this.selected.color == turn && valid_moves(row * ROWS + col)._1) {    //tmp == null && this.selected.color == turn && valid_moves(row * ROWS + col)._1 == true
           this.board.move(this.selected, row, col)
           //treba ukloniti figurice koje su eventualno pojedene
-          if (!valid_moves(row * ROWS + col)._2.isEmpty) {
+          if (valid_moves(row * ROWS + col)._2.nonEmpty) {
             this.board.remove(valid_moves(row * ROWS + col)._2)
           }
           this.change_turn()
           return true
         }
-        return false
+        false
       }
 
       def play_computer_move(): Unit = {
-        var list_pieces = this.board.get_pieces(this.computer_color)
+        val list_pieces = this.board.get_pieces(this.computer_color)
         var list_boards: List[Board] = List()
         for (piece <- list_pieces) {
           val map = this.board.get_valid_moves(piece)
-          for (k <- Range(0, map.length)) {
+          for (k <- map.indices) {    //k <- Range(0, map.length)
             if (map(k)._1) {
               val temp_board = this.board.clone()
               temp_board.move(temp_board.get_piece(piece.row, piece.col), k / ROWS, k % ROWS)
@@ -828,7 +844,7 @@ object GUI extends JFXApp {
           }
         }
 
-        var rand = new Random()
+        val rand = new Random()
         this.board = list_boards(rand.nextInt(list_boards.length))
         this.change_turn()
       }
@@ -939,7 +955,7 @@ object GUI extends JFXApp {
           if (tmp == null && this.selected.color == turn && valid_moves(row * ROWS + col)._1) {
             this.board.move(this.selected, row, col)
             //treba ukloniti figurice koje su eventualno pojedene
-            if (!valid_moves(row * ROWS + col)._2.isEmpty) {
+            if (valid_moves(row * ROWS + col)._2.nonEmpty) {
               this.board.remove(valid_moves(row * ROWS + col)._2)
             }
             move_ender = true
@@ -948,7 +964,7 @@ object GUI extends JFXApp {
             return true
           }
         }
-        return false
+        false
       }
 
     }
@@ -998,7 +1014,7 @@ object GUI extends JFXApp {
       var list_boards: List[Board] = List()
       for (piece <- list_pieces) {
         val map = board.get_valid_moves(piece)
-        for (k <- Range(0, map.length)) {
+        for (k <- map.indices) {    //k <- Range(0, map.length)
           if (map(k)._1) {
             val temp_board = board.clone()
             temp_board.move(temp_board.get_piece(piece.row, piece.col), k / ROWS, k % ROWS)
@@ -1028,7 +1044,7 @@ object GUI extends JFXApp {
       var coef = -1
       if (game.computer_color == PIECE_COL1)
         coef = 1
-      return coef * (board.player1_kings * 10 + board.player1_left - board.player2_kings * 10 - board.player2_left)
+      coef * (board.player1_kings * 10 + board.player1_left - board.player2_kings * 10 - board.player2_left)
     }
 
   } //END OF APP
