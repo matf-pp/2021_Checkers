@@ -12,11 +12,17 @@ The app offers the ability to play this game in three ways:
 <img src = "https://user-images.githubusercontent.com/78443756/118380276-c22d9100-b5e0-11eb-8451-8eed7d3b67b6.png" width ="250" height ="250"> <img src = "https://user-images.githubusercontent.com/78443756/118380284-da9dab80-b5e0-11eb-807e-51f57f6e2254.png" width ="265" height ="250"> <img src = "https://user-images.githubusercontent.com/78443756/118380301-f1440280-b5e0-11eb-9b60-00e00c43287f.png" width ="270" height ="250">
 
 ## 💻 Languages and technologies
-____
-We used Scala programming language for building our project.
+___
+We used Scala programming language and Intellij IDEA environment to create our project. Scalafx was used to make the GUI.
+
+## 📎 Download and run the app
+___
+An executable version of the program can be found in the releases section. It is necessary to download the .zip file. 
+To run the program, you need to have [Java](https://www.java.com/en/download/) installed on your computer.
 
 ## 🎓Authors
 ___
+The authors of this project are students of the Faculty of Mathematics in Belgrade:
 - Bogdan Bojović mr17010@alas.matf.bg.ac.rs 
 - Emilija Knežević mr18310@alas.matf.bg.ac.rs
 - Katarina Marjanović mr18228@alas.matf.bg.ac.rs
